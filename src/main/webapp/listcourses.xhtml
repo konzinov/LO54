@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <link rel="stylesheet" type="text/css" href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"/>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Courses</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+            <nav class="navbar navbar-inverse" style="border-radius: 0px">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand"  href="/school_manager"><img src="img/logo_utbm.png" style="max-width: 100px; max-height: 100px; margin-top: -20px"/></a>
+                    </div>
+
+                    <ul class="nav navbar-nav">
+                        <li><a href="/school_manager/listcourses.xhtml">Our Courses <span class="glyphicon glyphicon-book"></span></a></li>
+                        <li><a href="#">Search sessions <span class="glyphicon glyphicon-search"></span></a></li>
+                        <li><a href="#">About us</a></li>
+                    </ul>
+                </div>
+            </nav>
+            
+            <div id="pageContent" class="container">
+                <p:dataTable var="course" value="#{showCourses.courses}">
+                    <p:column headerText="Course title">
+                        <h:outputText value="#{course.title}"/>
+                    </p:column>
+                    <p:column headerText="View sessions">
+                       
+                    </p:column>
+                </p:dataTable>
+            </div>
+            
+        <script type="text/javascript" src="webjars/jquery/1.11.1/jquery.min.js"/>
+        <script type="text/javascript" src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"/>
+        </h:body>
+
+    </f:view>
+</html>
