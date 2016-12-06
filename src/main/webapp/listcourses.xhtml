@@ -14,6 +14,7 @@ and open the template in the editor.
     <f:view contentType="text/html">
         <h:head>
             <link rel="stylesheet" type="text/css" href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"/>
+            <link rel="stylesheet" type="text/css" href="css/app.css"/>
             <f:facet name="first">
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
                 <title>Courses</title>
@@ -36,14 +37,21 @@ and open the template in the editor.
             </nav>
             
             <div id="pageContent" class="container">
-                <p:dataTable var="course" value="#{showCourses.courses}">
-                    <p:column headerText="Course title">
+                <h:form>
+                    <p:dataTable var="course" value="#{showCourses.courses}" widgetVar="coursesTable"
+                             paginator="true" rows="5"
+                             filteredValue="#{showCourses.filteredCourses}"
+                             >
+                    <p:column headerText="Course title" filterBy="#{course.title}" filterMatchMode="contains">
                         <h:outputText value="#{course.title}"/>
                     </p:column>
-                    <p:column headerText="View sessions">
-                       
+                    <p:column headerText="View sessions" style="width: 200px">
+                        <p:button outcome="sessionsForCourse" icon="ui-icon-search">
+                            <f:param name="courseId" value="#{course.code}"/>
+                        </p:button>
                     </p:column>
                 </p:dataTable>
+                </h:form>
             </div>
             
         <script type="text/javascript" src="webjars/jquery/1.11.1/jquery.min.js"/>

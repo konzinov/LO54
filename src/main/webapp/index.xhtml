@@ -7,7 +7,7 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <link rel="stylesheet" type="text/css" href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"/>
-        <title>Facelet Title</title>
+        <title>Home</title>
     </h:head>
     <h:body>
         <nav class="navbar navbar-inverse" style="border-radius: 0px">
@@ -23,12 +23,35 @@
                 </ul>
             </div>
         </nav>
-        
-        
-        
-        Hello from Facelets
-        <br />
-        <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
+     
+        <div class="container" style="margin-top: 100px">
+            <div class="jumbotron" >
+                <div style="display: inline-block; vertical-align: top">
+                    <h1>Welcome !</h1>
+                    <a href="/school_manager/listcourses.xhtml"><h2>Register to our great courses</h2></a>
+                </div>
+                <div style="display: inline-block; vertical-align: top ;background-color: transparent;  margin-left: 300px" >
+                    <img src="img/utbm_jumbotron.jpg" class="img-responsive"/>
+                </div>
+            </div>
+            
+            <div>
+                <h:form>
+                    <p:dataGrid var="courseSession" value="#{home.incomingSessions}" layout="grid">
+                        <f:facet name="header">
+                            Incoming Sessions
+                        </f:facet>
+                        
+                        <p:panel header="#{courseSession.location.city}">
+                            <h:panelGrid columns="1" style="width: 100%">
+                                <h:outputText  style="color: blue; font-family: fantasy" value="#{courseSession.course.title}"/>
+                                <h:outputText value="#{courseSession.formatDate(courseSession.startDate)} to #{courseSession.formatDate(courseSession.endDate)}"/>
+                            </h:panelGrid>
+                        </p:panel>
+                    </p:dataGrid>
+                </h:form>
+            </div>
+        </div>
         
         
         

@@ -11,38 +11,45 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.inject.Named;
-import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 
 /**
  *
  * @author konzinov
  */
 @ManagedBean(name = "showCourses")
-@RequestScoped
+@ViewScoped
 public class showCourses implements Serializable {
     
     
-    private List<Course> courses = new ArrayList<Course>();
+    private List<Course> courses ;
+    private List<Course> filteredCourses ;
     private CourseService courseService = new CourseService(Course.class);
+    
     /**
      * Creates a new instance of showCourses
      */
     public showCourses() {
-       courses = courseService.getAll();       
+            
     }
     
     @PostConstruct
     public void init(){
-   //     courses = courseService.getAll();
-        
+         courses = courseService.getAll(); 
     }
     
     public List<Course> getCourses(){
         return courses;
     }
-    
-    
+
+    public List<Course> getFilteredCourses() {
+        return filteredCourses;
+    }
+
+    public void setFilteredCourses(List<Course> filteredCourses) {
+        this.filteredCourses = filteredCourses;
+    }
+
 }
