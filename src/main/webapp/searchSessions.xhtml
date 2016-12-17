@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <link rel="stylesheet" type="text/css" href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"/>
+        <title>Sessions</title>
+    </h:head>
+    <h:body>
+        <nav class="navbar navbar-inverse" style="border-radius : 0px">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand"  href="/school_manager"><img src="img/logo_utbm.png" style="max-width: 100px; max-height: 100px; margin-top: -20px"/></a>
+                </div>
+                
+                <ul class="nav navbar-nav">
+                    <li><a href="/school_manager/listcourses.xhtml">Our Courses <span class="glyphicon glyphicon-book"></span></a></li>
+                    <li><a href="#">Search sessions <span class="glyphicon glyphicon-search"></span></a></li>
+                    <li><a href="#">About us</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container" style="margin-top: 100px">
+            <h:form id="form">
+                <p:growl id="growl" life="2000"/>
+                <h:panelGrid columns="4" columnClasses="Title,Location,Date">                
+                    <h:panelGrid columns="2">
+                        <p:outputLabel for="title" value="Title"/>
+                        <p:inputText/>
+                    </h:panelGrid>
+                    
+                    <h:panelGrid columns="2">
+                        <p:outputLabel for="location" value="Location"/>
+                        <p:selectOneMenu id="location" value="#{searchSessions.location}" effect="fold">
+                            <f:selectItem itemLabel="Select One" itemValue=""/>
+                            <f:selectItem value="#{searchSessions.locationList}"/>
+                        </p:selectOneMenu>
+                    </h:panelGrid>
+                    
+                    <h:panelGrid columns="2">
+                        <p:outputLabel for="popup" value="Date"/>
+                        <p:calendar id="popup" value="#{searchSessions.date}"/>
+                    </h:panelGrid>
+                    
+                </h:panelGrid>
+                
+            </h:form>
+        </div>
+        
+    </h:body>
+</html>

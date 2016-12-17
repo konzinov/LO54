@@ -1,16 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>Available Sessions</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div>SESSIONS LIST</div>
-    </body>
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <link rel="stylesheet" type="text/css" href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"/>
+        <title>Sessions</title>
+    </h:head>
+    <h:body>
+        <nav class="navbar navbar-inverse" style="border-radius : 0px">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand"  href="/school_manager"><img src="img/logo_utbm.png" style="max-width: 100px; max-height: 100px; margin-top: -20px"/></a>
+                </div>
+                
+                <ul class="nav navbar-nav">
+                    <li><a href="/school_manager/listcourses.xhtml">Our Courses <span class="glyphicon glyphicon-book"></span></a></li>
+                    <li><a href="#">Search sessions <span class="glyphicon glyphicon-search"></span></a></li>
+                    <li><a href="#">About us</a></li>
+                </ul>
+            </div>
+        </nav>
+        
+        <div class="container" style="margin-top: 100px">
+            <div class="jumbotron">
+                <div style="display : inline-block;vertical-align: top">
+                    <f:metadata>
+                        <f:viewParam name = "courseId" value="#{sessions.courseId}" />
+                        <f:viewParam name = "courseTitle" />
+                    </f:metadata>
+                    <h:form>
+                        <p:dataScroller value="#{sessions.sessionList}" var="session" chunkSize="10">
+                            <f:facet name="header">
+                                Session for 
+                            </f:facet>
+                            <f:facet name="loader">
+                                <p:commandButton type="button" value="More" icon="ui-icon-circle-triangle-s"/>
+                            </f:facet>
+                            
+                            <h:panelGrid columns="2" style="width: 100%" columnClasses="info,detail">
+                                <p:button outcome="registrationForm" value="Register">
+                                    <f:param name="sessionId" value="#{session.id}"/>
+                                </p:button>
+                                
+                                <p:outputPanel>
+                                    <h:panelGrid columns="2" cellpadding="5">
+                                        <h:outputText value= "Location :" />
+                                        <h:outputText value="#{session.location}" style="font-weight : bold"/>
+                                        
+                                        <h:outputText value="Start date :"/>
+                                        <h:outputText value="#{session.startDate}" style="font-weight: bold"/>
+                                        
+                                        <h:outputText value="End date :"/>
+                                        <h:outputText value="#{session.endDate}" style="font-weight: bold"/>
+                                    </h:panelGrid>
+                                </p:outputPanel>
+                            </h:panelGrid>
+                        </p:dataScroller>
+                    </h:form>                
+                </div>
+            </div>
+        </div>
+    </h:body>
+      
 </html>
