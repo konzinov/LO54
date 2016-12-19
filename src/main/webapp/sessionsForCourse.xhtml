@@ -48,6 +48,8 @@
 
                        
                         <h:panelGrid columns="2" >
+                            
+                            
                                <h:outputText value= "Location :" />
                                <h:outputText value="#{courseSession.location.city}" style="font-weight : bold"/>
 
@@ -58,11 +60,9 @@
                                <h:outputText value="#{courseSession.formatDate(courseSession.endDate)}" style="font-weight: bold"/>
 
                            </h:panelGrid>
-                       
-
-                        <p:commandButton  value="Register" style="margin-top: 10px" icon="ui-icon-pencil" action="#{sessions.showRegisterationFrom}">
+                        <p:commandButton  value="Register" style="margin-top: 10px" icon="ui-icon-pencil" action="#{registerationMB.showRegisterationFrom(sessions.selectedCourseSession)}">
                             <f:setPropertyActionListener value="#{courseSession}" target="#{sessions.selectedCourseSession}" />
-                            <p:ajax event="dialogReturn" listener="#{sessions.onRegisterationComplete}"  update=":gridForm:growlStatus"/>
+                            <p:ajax event="dialogReturn" listener="#{registerationMB.onRegisterationComplete}"  update=":gridForm:growlStatus"/>
                         </p:commandButton>
                    </p:panelGrid>
                     <hr/>

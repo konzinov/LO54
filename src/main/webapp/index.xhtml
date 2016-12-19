@@ -49,9 +49,9 @@
                             <h:panelGrid columns="1" style="width: 100%">
                                 <h:outputText  style="color: blue; font-family: fantasy" value="#{courseSession.course.title}"/>
                                 <h:outputText value="#{courseSession.formatDate(courseSession.startDate)} to #{courseSession.formatDate(courseSession.endDate)}"/>   
-                                <p:commandButton value="Register" icon="ui-icon-pencil" action="#{home.showRegisterationFrom}">
+                                <p:commandButton value="Register" icon="ui-icon-pencil" action="#{registerationMB.showRegisterationFrom(home.selectedCourseSession)}">
                                     <f:setPropertyActionListener value="#{courseSession}" target="#{home.selectedCourseSession}" />
-                                    <p:ajax event="dialogReturn" listener="#{home.onRegisterationComplete}"  update=":gridForm:growlStatus"/>
+                                    <p:ajax event="dialogReturn" listener="#{registerationMB.onRegisterationComplete}"  update=":gridForm:growlStatus"/>
                                 </p:commandButton>
                             </h:panelGrid>
                         </p:panel>

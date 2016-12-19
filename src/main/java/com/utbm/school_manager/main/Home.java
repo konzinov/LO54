@@ -7,6 +7,7 @@ package com.utbm.school_manager.main;
 
 import com.mysite.entity.CourseSession;
 import com.mysite.service.CourseSessionService;
+import com.utbm.school_manager.subscription.RegisterationMB;
 import java.awt.event.ActionEvent;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.context.RequestContext;
@@ -35,11 +37,15 @@ public class Home implements Serializable{
      */
     
     private List<CourseSession> incomingSessions;
-    private CourseSessionService courseSessionService = new CourseSessionService(CourseSession.class);
+    private CourseSessionService courseSessionService;
     private CourseSession selectedCourseSession ;
+    
+   
     public Home() {
-        
+        courseSessionService = new CourseSessionService(CourseSession.class);
+        selectedCourseSession = new CourseSession();
     }
+   
     
     @PostConstruct
     public void init(){
@@ -53,38 +59,6 @@ public class Home implements Serializable{
     public void setIncomingSessions(List<CourseSession> incomingSessions) {
         this.incomingSessions = incomingSessions;
     }
-    
-    public void showRegisterationFrom(){
-        
-        Map<String,Object> options = new HashMap<String, Object>();
-        options.put("resizable", true);
-        options.put("draggable", true);
-        options.put("modal", true);
-        List<String> courseSessionIdValue = new ArrayList<>();
-         List<String> courseTitleValue = new ArrayList<>();
-         
-        courseSessionIdValue.add(""+selectedCourseSession.getId());
-        Map<String,List<String>> params = new HashMap<>();
-        params.put("courseSessionId",courseSessionIdValue);
-        
-        courseTitleValue.add(selectedCourseSession.getCourse().getTitle());
-        params.put("courseTitle", courseTitleValue);
-        RequestContext.getCurrentInstance().openDialog("registerationForm", options, params);
-    }
-    
-    public void onRegisterationComplete(SelectEvent event){
-        Boolean registerationStatus = (Boolean) event.getObject();
-        if(registerationStatus){
-            FacesContext.getCurrentInstance().addMessage(null, 
-                new FacesMessage(FacesMessage.SEVERITY_INFO, "Registeration successful", "See you!")
-                );
-        }
-        else{
-            FacesContext.getCurrentInstance().addMessage(null, 
-                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Registeration failed", "Please, retry")
-                );
-        }
-    }
 
     public CourseSession getSelectedCourseSession() {
         return selectedCourseSession;
@@ -94,8 +68,4 @@ public class Home implements Serializable{
         this.selectedCourseSession = selectedCourseSession;
     }
 
- 
-   
-    
-    
 }

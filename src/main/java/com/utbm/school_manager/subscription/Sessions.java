@@ -51,7 +51,7 @@ public class Sessions implements Serializable{
         this.sessionList = sessionList;
     }
     
-    /* I remove @PostConstruct because since we need viewParams to be setted
+    /* I removed @PostConstruct because since we need viewParams to be setted
     before requesting data this method is called in viewAction tag */
     public void init(){
         sessionCriteria.put("course_id", courseId);
@@ -97,38 +97,5 @@ public class Sessions implements Serializable{
     public void setSelectedCourseSession(CourseSession selectedCourseSession) {
         this.selectedCourseSession = selectedCourseSession;
     }
-    
-    
-    
-    public void showRegisterationFrom(){
-        
-        Map<String,Object> options = new HashMap<String, Object>();
-        options.put("resizable", true);
-        options.put("draggable", true);
-        options.put("modal", true);
-        List<String> courseSessionIdValue = new ArrayList<>();
-         List<String> courseTitleValue = new ArrayList<>();
-         
-        courseSessionIdValue.add(""+selectedCourseSession.getId());
-        Map<String,List<String>> params = new HashMap<>();
-        params.put("courseSessionId",courseSessionIdValue);
-        
-        courseTitleValue.add(selectedCourseSession.getCourse().getTitle());
-        params.put("courseTitle", courseTitleValue);
-        RequestContext.getCurrentInstance().openDialog("registerationForm", options, params);
-    }
-    
-    public void onRegisterationComplete(SelectEvent event){
-        Boolean registerationStatus = (Boolean) event.getObject();
-        if(registerationStatus){
-            FacesContext.getCurrentInstance().addMessage(null, 
-                new FacesMessage(FacesMessage.SEVERITY_INFO, "Registeration successful", "See you!")
-                );
-        }
-        else{
-            FacesContext.getCurrentInstance().addMessage(null, 
-                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Registeration failed", "Please, retry")
-                );
-        }
-    }
+   
 }
