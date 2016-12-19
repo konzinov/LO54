@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.utbm.school_manager.subscription;
+package com.utbm.school_manager.main;
 
 import com.mysite.entity.CourseSession;
 import com.mysite.service.CourseSessionService;
+import java.awt.event.ActionEvent;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,89 +17,42 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 
-
 /**
  *
- * @author Rémi
- * 
- * 
- * 
+ * @author konzinov
  */
-@ManagedBean(name = "sessions")
-@ViewScoped
-public class Sessions implements Serializable{
+@ManagedBean(name = "home")
+@SessionScoped
+public class Home implements Serializable{
+
+    /**
+     * Creates a new instance of home
+     */
     
+    private List<CourseSession> incomingSessions;
     private CourseSessionService courseSessionService = new CourseSessionService(CourseSession.class);
-    private Map<String,String> sessionCriteria = new HashMap<String,String>();
-    private List<CourseSession> sessionList = new ArrayList<CourseSession>();
-    private String courseId;
-    private String courseTitle;
-    private CourseSession selectedCourseSession;
-
-    public Sessions() {
-    }
-
-    public List<CourseSession> getSessionList() {
-        return sessionList;
-    }
-
-    public void setSessionList(List<CourseSession> sessionList) {
-        this.sessionList = sessionList;
+    private CourseSession selectedCourseSession ;
+    public Home() {
+        
     }
     
-    /* I remove @PostConstruct because since we need viewParams to be setted
-    before requesting data this method is called in viewAction tag */
+    @PostConstruct
     public void init(){
-        sessionCriteria.put("course_id", courseId);
-        sessionList = courseSessionService.showSessionFromCriteria(sessionCriteria);
+        incomingSessions = courseSessionService.showIncomingSessions();
     }
 
-    public String getCourseId() {
-        return courseId;
+    public List<CourseSession> getIncomingSessions() {
+        return incomingSessions;
     }
 
-    public void setCourseId(String courseId) {
-        this.courseId = courseId;
+    public void setIncomingSessions(List<CourseSession> incomingSessions) {
+        this.incomingSessions = incomingSessions;
     }
-    
-    public CourseSessionService getCourseSessionService() {
-        return courseSessionService;
-    }
-
-    public void setCourseSessionService(CourseSessionService courseSessionService) {
-        this.courseSessionService = courseSessionService;
-    }
-
-    public Map<String, String> getSessionCriteria() {
-        return sessionCriteria;
-    }
-
-    public void setSessionCriteria(Map<String, String> sessionCriteria) {
-        this.sessionCriteria = sessionCriteria;
-    }
-
-    public String getCourseTitle() {
-        return courseTitle;
-    }
-
-    public void setCourseTitle(String courseTitle) {
-        this.courseTitle = courseTitle;
-    }
-
-    public CourseSession getSelectedCourseSession() {
-        return selectedCourseSession;
-    }
-
-    public void setSelectedCourseSession(CourseSession selectedCourseSession) {
-        this.selectedCourseSession = selectedCourseSession;
-    }
-    
-    
     
     public void showRegisterationFrom(){
         
@@ -131,4 +85,17 @@ public class Sessions implements Serializable{
                 );
         }
     }
+
+    public CourseSession getSelectedCourseSession() {
+        return selectedCourseSession;
+    }
+
+    public void setSelectedCourseSession(CourseSession selectedCourseSession) {
+        this.selectedCourseSession = selectedCourseSession;
+    }
+
+ 
+   
+    
+    
 }

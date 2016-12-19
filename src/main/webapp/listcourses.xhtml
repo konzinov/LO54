@@ -41,9 +41,9 @@ and open the template in the editor.
             
             <div id="pageContent" class="container">
                 <h:form>
-                    <p:dataTable var="course" value="#{showCourses.courses}" widgetVar="coursesTable"
+                    <p:dataTable var="course" value="#{courseMB.courses}" widgetVar="coursesTable"
                              paginator="true" rows="5"
-                             filteredValue="#{showCourses.filteredCourses}"
+                             filteredValue="#{courseMB.filteredCourses}"
                              >
                     <p:column headerText="Course title" filterBy="#{course.title}" filterMatchMode="contains">
                         <h:outputText value="#{course.title}"/>
@@ -51,6 +51,7 @@ and open the template in the editor.
                     <p:column headerText="View sessions" style="width: 200px">
                         <p:button outcome="sessionsForCourse" icon="ui-icon-search">
                             <f:param name="courseId" value="#{course.code}"/>
+                            <f:param name="courseTitle" value="#{course.title}"/>
                         </p:button>
                     </p:column>
                 </p:dataTable>

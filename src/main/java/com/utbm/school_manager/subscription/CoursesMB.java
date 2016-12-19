@@ -8,10 +8,8 @@ package com.utbm.school_manager.subscription;
 import com.mysite.entity.Course;
 import com.mysite.service.CourseService;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -19,9 +17,9 @@ import javax.faces.bean.ViewScoped;
  *
  * @author konzinov
  */
-@ManagedBean(name = "showCourses")
+@ManagedBean(name = "courseMB")
 @ViewScoped
-public class showCourses implements Serializable {
+public class CoursesMB implements Serializable {
     
     
     private List<Course> courses ;
@@ -31,8 +29,7 @@ public class showCourses implements Serializable {
     /**
      * Creates a new instance of showCourses
      */
-    public showCourses() {
-            
+    public CoursesMB() {      
     }
     
     @PostConstruct

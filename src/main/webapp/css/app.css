@@ -6,3 +6,9 @@
 .ui-column-filter{
     width: 500px;
 }
+
+
+
+.removeBorder>* {
+    border: none;
+}
