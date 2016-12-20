@@ -10,7 +10,7 @@ and open the template in the editor.
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
-    
+
     <f:view contentType="text/html">
         <f:metadata>
             <f:viewParam name="courseSessionId" value="#{registerationMB.sessionId}"/>
@@ -30,44 +30,43 @@ and open the template in the editor.
         </h:head>
 
         <h:body> 
-          
-                <h:form>
-                      
-                    <p:panelGrid columns="3" layout="grid" id="gridForm">
-                        <p:outputLabel for="lastName" value="Lastname"/>
-                        <p:inputText id="lastName" value="#{registerationMB.clientToRegister.lastname}" required="true" requiredMessage="Enter valid lastname" validatorMessage="Invalid data">
-                            <f:validateRequired for="lastName"/>
-                            <f:validateLength minimum="2"/>
-                            <f:validateRegex pattern="^[a-zA-z]+$"/>
-                        </p:inputText>
-                        <p:message for="lastName"/>
-                        
-                        <p:outputLabel for="firstName" value="Firstname" />
-                        <p:inputText id="firstName" value="#{registerationMB.clientToRegister.firstname}" required="true" requiredMessage="Enter valid firstname" validatorMessage="Invalid data">
-                            <f:validateRequired for="firstName"/>
-                            <f:validateLength minimum="2"/>
-                            <f:validateRegex pattern="^[a-zA-z]+$"/>
-                        </p:inputText>
-                        <p:message for="firstName"/>
-                        
-                        <p:outputLabel for="address" value="Address"/>
-                        <p:inputText id="address" value="#{registerationMB.clientToRegister.address}" required="true" requiredMessage="Provide your address" >
-                            <f:validateRequired for="address"/>
-                        </p:inputText>
-                        <p:message for="address"/>
-                        
-                        <p:outputLabel for="phone" value="Phone:"/>
-                        <p:inputMask id="phone" value="#{registerationMB.clientToRegister.phone}" required="true" requiredMessage="Provide your Phone Number" mask="9999999999"/>
-                        <p:message for="phone"/>
-                        
-                        <p:outputLabel for="email" value="Email"/>
-                        <p:inputText id="email" value="#{registerationMB.clientToRegister.email}">
-                            <f:validator validatorId="util.emailValidator" />
-                        </p:inputText>
-                        <p:message for="email"/>
-                    </p:panelGrid>   
-                    <p:commandButton value="Valider" action="#{registerationMB.registerClient}" validateClient="true" ajax="false"/>
-                </h:form>
+
+            <h:form>
+                <p:panelGrid columns="3" layout="grid" id="gridForm">
+                    <p:outputLabel for="lastName" value="Lastname"/>
+                    <p:inputText id="lastName" value="#{registerationMB.clientToRegister.lastname}" required="true" requiredMessage="Enter valid lastname" validatorMessage="Invalid data">
+                        <f:validateRequired for="lastName"/>
+                        <f:validateLength minimum="2"/>
+                        <f:validateRegex pattern="^[a-zA-z]+$"/>
+                    </p:inputText>
+                    <p:message for="lastName"/>
+
+                    <p:outputLabel for="firstName" value="Firstname" />
+                    <p:inputText id="firstName" value="#{registerationMB.clientToRegister.firstname}" required="true" requiredMessage="Enter valid firstname" validatorMessage="Invalid data">
+                        <f:validateRequired for="firstName"/>
+                        <f:validateLength minimum="2"/>
+                        <f:validateRegex pattern="^[a-zA-z]+$"/>
+                    </p:inputText>
+                    <p:message for="firstName"/>
+
+                    <p:outputLabel for="address" value="Address"/>
+                    <p:inputText id="address" value="#{registerationMB.clientToRegister.address}" required="true" requiredMessage="Provide your address" >
+                        <f:validateRequired for="address"/>
+                    </p:inputText>
+                    <p:message for="address"/>
+
+                    <p:outputLabel for="phone" value="Phone:"/>
+                    <p:inputMask id="phone" value="#{registerationMB.clientToRegister.phone}" required="true" requiredMessage="Provide your Phone Number" mask="9999999999"/>
+                    <p:message for="phone"/>
+
+                    <p:outputLabel for="email" value="Email"/>
+                    <p:inputText id="email" value="#{registerationMB.clientToRegister.email}">
+                        <f:validator validatorId="util.emailValidator" />
+                    </p:inputText>
+                    <p:message for="email"/>
+                </p:panelGrid>   
+                <p:commandButton value="Valider" action="#{registerationMB.registerClient}" validateClient="true" ajax="false"/>
+            </h:form>
         </h:body>
     </f:view>
 </html>

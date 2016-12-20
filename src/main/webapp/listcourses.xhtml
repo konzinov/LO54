@@ -14,7 +14,7 @@ and open the template in the editor.
     <f:view contentType="text/html">
         <h:head>
             <link rel="stylesheet" type="text/css" href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"/>
-            
+
             <f:facet name="first">
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
                 <title>Courses</title>
@@ -33,33 +33,33 @@ and open the template in the editor.
 
                     <ul class="nav navbar-nav">
                         <li><a href="/school_manager/listcourses.xhtml">Our Courses <span class="glyphicon glyphicon-book"></span></a></li>
-                        <li><a href="#">Search sessions <span class="glyphicon glyphicon-search"></span></a></li>
+                        <li><a href="/school_manager/searchSessions.xhtml">Search sessions <span class="glyphicon glyphicon-search"></span></a></li>
                         <li><a href="#">About us</a></li>
                     </ul>
                 </div>
             </nav>
-            
+
             <div id="pageContent" class="container">
                 <h:form>
                     <p:dataTable var="course" value="#{courseMB.courses}" widgetVar="coursesTable"
-                             paginator="true" rows="5"
-                             filteredValue="#{courseMB.filteredCourses}"
-                             >
-                    <p:column headerText="Course title" filterBy="#{course.title}" filterMatchMode="contains">
-                        <h:outputText value="#{course.title}"/>
-                    </p:column>
-                    <p:column headerText="View sessions" style="width: 200px">
-                        <p:button outcome="sessionsForCourse" icon="ui-icon-search">
-                            <f:param name="courseId" value="#{course.code}"/>
-                            <f:param name="courseTitle" value="#{course.title}"/>
-                        </p:button>
-                    </p:column>
-                </p:dataTable>
+                                 paginator="true" rows="5"
+                                 filteredValue="#{courseMB.filteredCourses}"
+                                 >
+                        <p:column headerText="Course title" filterBy="#{course.title}" filterMatchMode="contains">
+                            <h:outputText value="#{course.title}"/>
+                        </p:column>
+                        <p:column headerText="View sessions" style="width: 200px">
+                            <p:button outcome="sessionsForCourse" icon="ui-icon-search">
+                                <f:param name="courseId" value="#{course.code}"/>
+                                <f:param name="courseTitle" value="#{course.title}"/>
+                            </p:button>
+                        </p:column>
+                    </p:dataTable>
                 </h:form>
             </div>
-            
-        <script type="text/javascript" src="webjars/jquery/1.11.1/jquery.min.js"/>
-        <script type="text/javascript" src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"/>
+
+            <script type="text/javascript" src="webjars/jquery/1.11.1/jquery.min.js"/>
+            <script type="text/javascript" src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"/>
         </h:body>
 
     </f:view>

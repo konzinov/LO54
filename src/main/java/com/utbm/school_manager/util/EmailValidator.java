@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.utbm.school_managerutil;
+package com.utbm.school_manager.util;
 
 import java.util.Map;
 import java.util.regex.Pattern;

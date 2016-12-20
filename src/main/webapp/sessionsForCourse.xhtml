@@ -27,7 +27,7 @@
                 
                 <ul class="nav navbar-nav">
                     <li><a href="/school_manager/listcourses.xhtml">Our Courses <span class="glyphicon glyphicon-book"></span></a></li>
-                    <li><a href="#">Search sessions <span class="glyphicon glyphicon-search"></span></a></li>
+                    <li><a href="/school_manager/searchSessions.xhtml">Search sessions <span class="glyphicon glyphicon-search"></span></a></li>
                     <li><a href="#">About us</a></li>
                 </ul>
             </div>
@@ -35,7 +35,7 @@
         
         <div id="pageContent" class="container" >
             <h:form id="gridForm">
-                <p:growl id="growlStatus" showDetail="true" sticky="true" life="5000"/>
+                <p:growl id="growlStatus" showDetail="true"  life="2000"/>
                 <p:dataScroller value="#{sessions.sessionList}" var="courseSession" chunkSize="10">
                     <f:facet name="header">
                         Session for #{sessions.courseTitle}

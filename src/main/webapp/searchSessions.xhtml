@@ -7,6 +7,7 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <link rel="stylesheet" type="text/css" href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="css/app.css"/>
         <title>Sessions</title>
     </h:head>
     <h:body>
@@ -15,40 +16,85 @@
                 <div class="navbar-header">
                     <a class="navbar-brand"  href="/school_manager"><img src="img/logo_utbm.png" style="max-width: 100px; max-height: 100px; margin-top: -20px"/></a>
                 </div>
-                
+
                 <ul class="nav navbar-nav">
                     <li><a href="/school_manager/listcourses.xhtml">Our Courses <span class="glyphicon glyphicon-book"></span></a></li>
-                    <li><a href="#">Search sessions <span class="glyphicon glyphicon-search"></span></a></li>
+                    <li><a href="/school_manager/searchSessions.xhtml">Search sessions <span class="glyphicon glyphicon-search"></span></a></li>
                     <li><a href="#">About us</a></li>
                 </ul>
             </div>
         </nav>
         <div class="container" style="margin-top: 100px">
-            <h:form id="form">
-                <p:growl id="growl" life="2000"/>
-                <h:panelGrid columns="4" columnClasses="Title,Location,Date">                
-                    <h:panelGrid columns="2">
-                        <p:outputLabel for="title" value="Title"/>
-                        <p:inputText/>
-                    </h:panelGrid>
-                    
-                    <h:panelGrid columns="2">
-                        <p:outputLabel for="location" value="Location"/>
-                        <p:selectOneMenu id="location" value="#{searchSessions.location}" effect="fold">
+            <h:form id="searchForm" class="ui-grid" style="margin-bottom: 10px">
+                <p:growl id="growlStatus" showDetail="true"  life="2000"/>
+                <div class="ui-grid-row"  style="margin-bottom: 10px">
+                    <div class="ui-grid-col-2"><p:outputLabel for="title" value="Title"/></div>
+                    <div class="ui-grid-col-8"><p:inputText id="title" style="width: 200px"
+                                                            value="#{searchSessions.title}"/></div>
+                </div>
+                <div class="ui-grid-row"  style="margin-bottom: 10px">
+                    <div class="ui-grid-col-2"><p:outputLabel for="location" value="Location"/></div>
+                    <div class="ui-grid-col-8">
+                        <p:autoComplete id="location" dropdown="true"  effect="fold" style="width: 200px"
+                                        completeMethod="#{searchSessions.completeLocations}"
+                                        value="#{searchSessions.location}" converter="locationConverter"
+                                        var="location" itemValue="#{location}" itemLabel="#{location.city}"
+                                        forceSelection="true">
                             <f:selectItem itemLabel="Select One" itemValue=""/>
-                            <f:selectItem value="#{searchSessions.locationList}"/>
-                        </p:selectOneMenu>
-                    </h:panelGrid>
-                    
-                    <h:panelGrid columns="2">
-                        <p:outputLabel for="popup" value="Date"/>
-                        <p:calendar id="popup" value="#{searchSessions.date}"/>
-                    </h:panelGrid>
-                    
-                </h:panelGrid>
-                
+                        </p:autoComplete>
+                    </div>
+                </div>
+                <div class="ui-grid-row"  style="margin-bottom: 20px">
+                    <div class="ui-grid-col-2"><p:outputLabel for="dateInput" value="Date" /></div>
+                    <div class="ui-grid-col-8"><p:calendar id="dateInput" value="#{searchSessions.date}"/></div>
+                </div>
+                <div class="ui-grid-row"  style="margin-bottom: 10px">
+                    <div class="ui-grid-col-2"><p:outputLabel  value="" /></div>
+                    <div class="ui-grid-col-8" style="margin-left: 120px"><p:commandButton id="submitButton" value="Search" icon="ui-icon-search"
+                                                                                           action="#{searchSessions.searchSessions}" ajax="false"/>
+                    </div>
+                </div>
+
+
+                <p:dataScroller id="dataScroll" value="#{searchSessions.foundSessions}" var="courseSession" chunkSize="10">
+                    <f:facet name="header">
+                        RESULTS
+                    </f:facet>
+                    <f:facet name="loader">
+                        <p:commandButton type="button" value="More" icon="ui-icon-circle-triangle-s"/>
+                    </f:facet>
+
+                    <p:panelGrid columns="2" layout="grid" styleClass="removeBorder" >
+
+
+                        <h:panelGrid columns="2" >
+
+                            <h:outputText value="Course: " />
+                            <h:outputText value="#{courseSession.course.title}" style="font-weight : bold"/>
+                            
+                            <h:outputText value= "Location :" />
+                            <h:outputText value="#{courseSession.location.city}" style="font-weight : bold"/>
+
+                            <h:outputText value="Start date :"/>
+                            <h:outputText value="#{courseSession.formatDate(courseSession.startDate)}" style="font-weight: bold"/>
+
+                            <h:outputText value="End date :"/>
+                            <h:outputText value="#{courseSession.formatDate(courseSession.endDate)}" style="font-weight: bold"/>
+
+                        </h:panelGrid>
+                        <p:commandButton  value="Register" style="margin-top: 10px" icon="ui-icon-pencil" action="#{registerationMB.showRegisterationFrom(searchSessions.selectedCourseSession)}">
+                            <f:setPropertyActionListener value="#{courseSession}" target="#{searchSessions.selectedCourseSession}" />
+                            <p:ajax event="dialogReturn" listener="#{registerationMB.onRegisterationComplete}" update=":searchForm:growlStatus" />
+                        </p:commandButton>
+                    </p:panelGrid>
+                    <hr/>
+                </p:dataScroller>
             </h:form>
+
+
+
+
         </div>
-        
+
     </h:body>
 </html>
